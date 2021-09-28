@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='root'></div>
+ 
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+    
+      function InputFields() {
+        const[name,setName] = React.useState({firstName:'', lastName: ''});
+        const[age,setAge] = React.useState('');
+        const[firstName,setFirstName] = React.useState('');
+        const[nimi,setNimi] = React.useState('');
+
+        const inputChangedF= (event) => {
+          setFirstName(event.target.value);
+        };
+
+        const inputChanged= (event) => {
+          setAge(event.target.value);
+        };
+  
+
+        const addTeksti = (event) => {
+          event.preventDefault(); 
+          if(age > 18) {
+            setNimi('Hello ' + firstName);
+          } else {
+            setNimi('You are too young');            
+          }
+        }
+
+        return (
+          <div>
+            <div>{nimi}</div>
+            <form onSubmit={addTeksti}>
+              <div>Name: <input type="text" value={firstName} onChange={inputChangedF} /></div>
+              <div>Age: <input type="text" value={age} onChange={inputChanged} /></div>
+              <input type="submit" value="Submit" />  
+            </form>
+          </div>
+        );
+      };
+
+      ReactDOM.render(<InputFields />, document.getElementById("root"));
+
+    </script>
+  </body>
+</html>
